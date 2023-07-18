@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 
-import { getContacts, add } from 'redux/contacts/slice';
+import { selectContacts } from 'redux/selectors';
+import { addContacts } from 'redux/operations';
 
 import schema from '../../validation/schema';
 
@@ -18,7 +19,7 @@ import {
 } from './AddContactForm.styled';
 
 const AddContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const {
@@ -39,7 +40,6 @@ const AddContactForm = () => {
 
   const handleSubmitForm = data => {
     const { name } = data;
-    console.log(contacts);
     const matches = contacts.find(item => item.name === name);
     if (matches) {
       toast.info(
@@ -48,7 +48,7 @@ const AddContactForm = () => {
       return;
     }
     toast.success('New contact added!!');
-    dispatch(add(data));
+    dispatch(addContacts(data));
     reset();
   };
 

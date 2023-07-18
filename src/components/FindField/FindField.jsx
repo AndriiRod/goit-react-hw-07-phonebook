@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, Label, Icon } from './FindField.styled';
 
-import { getFilter } from 'redux/filter/slice';
+import { selectFilter } from 'redux/selectors';
 import { search } from 'redux/filter/slice';
 
 const FindField = () => {
   const dispatch = useDispatch();
-  const value = useSelector(getFilter);
+  const value = useSelector(selectFilter);
 
   const onChangeHuddler = e => {
     dispatch(search(e.target.value));

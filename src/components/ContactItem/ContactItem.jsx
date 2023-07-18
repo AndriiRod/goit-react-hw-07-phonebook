@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { remove } from 'redux/contacts/slice';
+import { deleteContacts } from 'redux/operations';
 
 import {
   Item,
@@ -14,17 +14,17 @@ import {
 
 import placeholder from '../../images/placeholder.png';
 
-const ContactItem = ({ id, name, number }) => {
+const ContactItem = ({ id, name, number, avatar }) => {
   const dispatch = useDispatch();
 
   return (
     <Item>
-      <Img src={placeholder} alt="avatar" />
+      <Img src={avatar ? avatar : placeholder} alt="avatar" />
       <TextWrap>
         <Name>{name}</Name>
         <Number>{number}</Number>
       </TextWrap>
-      <DeleteBtn onClick={() => dispatch(remove(id))} type="button">
+      <DeleteBtn type="button" onClick={() => dispatch(deleteContacts(id))}>
         <Icon />
       </DeleteBtn>
     </Item>
