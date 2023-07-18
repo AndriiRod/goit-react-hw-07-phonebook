@@ -13,7 +13,7 @@ const handleRejected = (state, action) => {
 const fetchContactsReducer = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.items = action.payload;
+  state.items = action.payload.reverse();
 };
 
 const addContactsReducer = (state, action) => {
